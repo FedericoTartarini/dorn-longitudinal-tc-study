@@ -15,7 +15,6 @@ code/models/*/dict_pcm_shap_values_*.pickle.zip
 code/zip_models/*
 
 # remove some data files since are too big
-data
 temp-plot.html
 
 # editor logs
