@@ -1,0 +1,94 @@
+%! Author = sbbfti
+%! Date = 10/06/2020
+
+\documentclass{article}
+
+\usepackage{setspace}
+
+\usepackage{mypreamble}
+
+\input{myglossary.tex}
+
+\usepackage[nolists, heads, tablesfirst, figlist]{endfloat}
+
+\usepackage{authblk}
+
+\title{Personal comfort models based on a six-month experiment using environmental parameters and data from wearables}
+
+\author[a]{Federico Tartarini\thanks{corresponding author: federicotartarini@berkeley.edu}}
+\author[b]{Stefano Schiavon}
+\author[c]{Matias Quintana}
+\author[c]{Clayton Miller}
+
+\affil[a]{Berkeley Education Alliance for Research in Singapore, Singapore}
+\affil[b]{Center for the Built Environment, University of California, Berkeley, CA, USA}
+\affil[c]{Department of the Built Environment, National University of Singapore, Singapore}
+
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    margin=25mm,
+}
+
+\begin{document}
+
+    \maketitle
+
+    \begin{abstract}
+        Personal thermal comfort models are a paradigm shift in predicting how building occupants perceive their thermal environment.
+        Previous work has critical limitations related to the length of the data collected and diversity of spaces.
+        This paper outlines a longitudinal field study comprising 20 participants who answered right-here-right-now surveys using a smartwatch for 180 days.
+        We collected more than 1080 field-based surveys per participant.
+        Surveys were matched with environmental and physiological measured variables collected indoors in their homes and offices.
+        We then trained and tested seven machine learning models per participant to predict their thermal preference.
+        Participants indicated \var{per_no_change}~\% of the time to want \emph{no change} in their thermal environment despite completing 75~\% of these surveys at temperatures higher than 26.6~$^{\circ}$C.
+        All but one personal comfort models had a median prediction accuracy of \var{median_f1_score_no_gnb} (F1-score).
+        Skin, indoor, and near body temperatures, and heart rate were most valuable variables for accurate prediction.
+        We found that $\approx$~250--300 data points per participant were needed for accurate prediction.
+        Our study provides quantitative evidence on how to improve the accuracy of personal comfort models, prove the benefits of using wearable devices to predict thermal preference, and validate results from previous studies.
+    \end{abstract}
+
+    \paragraph{Short Running Title} Field study on personal comfort models.
+
+    \paragraph{Keywords} Personal thermal comfort model, Ecological momentary assessment, Skin temperature, Machine learning, Internet of Things (IoT).
+
+    \paragraph{Data availability statement} The source code we used to analyse the data and the full dataset are publicly available at this URL: \url{https://github.com/FedericoTartarini/dorn-longitudinal-tc-study}.
+
+    \paragraph{Funding statement} This research has been supported by the Republic of Singapore's National Research Foundation through a grant to the Berkeley Education Alliance for Research in Singapore (BEARS) for the Singapore-Berkeley Building Efficiency and Sustainability in the Tropics (SinBerBEST) Program.
+
+    \paragraph{Conflict of interest} The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+    \paragraph{Ethics approval} The human subject experiment for this study was approved by the University of California Berkeley IRB (Institutional Review Board: 2020-01-12899).
+
+    \paragraph{Practical implications} In addition to demonstrating the advantages of employing wearable technology to gather subjective feedback from people, our study validates the findings from earlier research and offers quantitative evidence on how to increase the precision of personal comfort models.
+    Our methodology and results can be used in buildings to develop and implement occupants' centric controls.
+    This will enable building owners and operators to enhance thermal comfort conditions indoors while possibly reducing the overall energy consumption of the building.
+    We made the decision to openly publish our data so that others might use it to test various assumptions or create personal comfort models utilizing various methodologies.
+
+    \clearpage
+
+    \input{myacronyms.tex}
+
+    \linenumbers
+
+    \doublespacing
+
+    \input{sections/introduction}
+
+    \input{sections/methodology}
+
+    \input{sections/results}
+
+    \input{sections/discussion.tex}
+
+    \input{sections/conclusions.tex}
+
+    \singlespacing
+
+    \printbibliography
+
+    \clearpage
+
+    % \input{sections/appendix.tex}
+
+\end{document}

@@ -1,0 +1,109 @@
+\section{Discussion}\label{sec:discussion}
+The results of our study enabled us to draw several connections to the existing literature, discuss the usefulness and limitations of the methodology and results, and motivate future work. 
+
+\subsection{Impact of training data size on model prediction}\label{subsec:effect-of-data-size-on-model-prediction}
+One novel aspect of our study was the duration of the data collection, which enabled us to gather the longest longitudinal data set so far among studies that aimed to develop personal thermal comfort models~\cite{ArakawaMartins2022}.
+We collected more than double the amount of points per participant and we made the dataset publicly available.
+Personal comfort models necessitate data for both testing and training.
+Hence, a sufficiently large number of data points from each participant is required for the machine learning algorithm to converge.
+Figure~\ref{fig:thermal_f1_micro_env_sma_oth} illustrates how increasing the size of trained data improves the model prediction power based on the collected data set.
+Across all participants, the model prediction accuracy (F1-micro) stabilized to a plateau at around 300 data points.
+Individual personal models show varying degrees of sensitivity to dataset size.
+This insight highlights the diminishing return of collecting more than 250--300 data points for most test participants.
+This result is specific to our study and other authors may find a different range based on their study methodology.
+Our results agree and provide additional supporting evidence to validate those obtained by \textcite{Liu2019a}.
+Arguably, the amount of data needed to characterize thermal comfort could be reduced even further with the development of targeted sampling that strategically requests feedback only when required to increase the model prediction power~\cite{Roa2020-fz}.
+In our study, we already implemented this strategy. 
+Participants received a text message when exposed to environmental conditions that they rarely experienced before, to maximize the chances of obtaining a balanced dataset.
+However, we still asked them to complete, on average, a total of 6 surveys per day.
+This requirement can be significantly reduced or removed altogether in future studies thanks to targeted surveys.
+For some participants, the prediction accuracy slightly decreased as the trained data size increased from 42 to 126. 
+This situation is expected since, as time passes, they may be exposed to a broader range of environmental factors and conditions that they did not experience before, and the model needs to learn how to predict participants' thermal preferences under these new sets of conditions.
+This result is a significant advantage that personal comfort models have over aggregate models since they can be re-trained as new data are collected.
+This situation may be partially alleviated by the use of transfer learning, ensemble strategies, and domain adaptation which can be used to predict individual thermal preference even when there is a lack of data regarding a specific person~\cite{Park2022, Das2021}.
+
+We also observed that, for some participants, the F1-micro curves did not vary much as a function of the data size (e.g., participants 9 and 10).
+Some possible causes of this are that participants were constantly exposed to warm temperatures and that some did not maintain compliance with experimental guidelines.
+The latter point is discussed in Section~\ref{subsec:compliance}.
+For example, participant 10 was always exposed to temperatures above 27.5~$^{\circ}$C when completing the \ac{rhrn} survey and reported wanting to be `cooler' 98~\% of the time.
+This scenario is expected in Singapore, where the recorded outdoor temperature over the six-month study period was higher than 26.5~$^{\circ}$C for 75~\% of the time.
+
+\subsection{Independent variables importance in thermal preference prediction}\label{subsec:features}
+We used \gls{shap} values to quantification of the impact that each independent variable had on the accuracy of the personal models.
+While the average magnitude for each variable varied in different models \acf{t-db}, \acf{t-nb}, \acf{hr}, \acf{t-sk-w}, and \acf{w-i} contributed the most to the models' final predictions.
+This insight is in line with the existing body of knowledge since \ac{t-db} is the primary driver of sensible heat loss or gain from the environment to the human body.
+Our results reinforce previous work~\cite{Liu2019a}.
+The \ac{hr} is a proxy for the level of activity of the person, and it is positively correlated with the metabolic rate.
+The value of \ac{t-sk-w} reflects the vasomotor tone. 
+The human body uses vasoconstriction and vasodilation for thermoregulation~\cite{Romanovsky2018}.
+Finally, \ac{w-i} influences the latent heat loss towards the environment.
+On the other hand, the outdoor air temperature, occupant location, and outdoor humidity ratio only had a marginal contribution to the final prediction, which can be explained by the fact that these variables do not directly influence people's thermal sensation or preference, in particular during steady-state conditions.
+The value of the outdoor air temperature only indirectly affects occupants' thermal preferences since they may influence the type of clothing that participants decide to wear before leaving their homes.
+
+\subsubsection{Self-reported clothing and activity}
+We found that including self-reported clothing and activity in some models did not significantly increment the model prediction accuracy.
+While this seems to be counterintuitive since both clothing and metabolic rate play a significant role in human thermo-regulation, we believed that they did not increase the model prediction accuracy since they were reported qualitatively by participants who only had four options to choose from.
+Other measured variables like \ac{hr} may better correlate with the participant's actual metabolic rate than self-reported activity.
+This result has positive implications since, in a real-world application, the building controller would not have access to information about clothing and activity levels.
+
+\subsubsection{Near-body temperature}
+While our results showed that \ac{t-nb} significantly contributed to the model prediction, it should be noted that \ac{t-nb} was strongly correlated with both \ac{t-db} and \ac{t-sk-w}.
+Consequently, it would be sufficient to measure these two latter variables in most cases.
+On the other hand, only using \ac{t-nb} as a proxy for \ac{t-db} would decrease the complexity of the data collection, but at the same time, it would reduce the overall model accuracy.
+We decided to measure, log, and include in the models \ac{t-nb} since many people in warm climates use fans to cool themselves.
+Measuring airspeed in the proximity of the occupants in longitudinal studies is impractical, very expensive, and inaccurate.
+Battery-powered anemometers would need to be recharged frequently, are very expensive, and are sensitive to direction.
+Airspeed varies significantly both spatially and temporally;\ consequently, accurate readings can only be obtained in laboratories using scientific-grade sensors installed on stands mounted near the subject.
+The value of \acl{t-nb} can then be used as a proxy to partially compensate for the lack of airspeed data.
+When airspeed is low, \ac{t-nb} is significantly affected by the thermal plume of the participant and in turn by \ac{t-sk}~\cite{Zhang2017}.
+On the other hand, when participants are cooling themselves using electric fans, the airflow disrupts the thermal plume, and \ac{t-nb} is mainly influenced by \ac{t-db}.
+
+\subsubsection{Skin temperature}
+Participants did not report any significant discomfort by wearing the \gls{ib} for an extended period. 
+At the end of the study, 16 participants answered positively to the following question: ``Would you wear the Fitbit and complete a few surveys per day for two weeks for no financial reward, if you knew that the information would improve your well-being indoors?''.
+However, measuring \ac{t-sk-w} using an \gls{ib} adds complexity and may be still the source of mild discomfort for some people.
+\gls{ib} cannot communicate wirelessly;\ hence data cannot be accessed in real-time.
+There have been several announcements from the leading smartwatch manufacturers to include a skin temperature sensor in their devices.
+Still, at the time of writing this manuscript, no smartwatch available on the market could measure it accurately.
+However, in  September 2022 at the time of reviewing this manuscript, Apple announced that they have released a new Apple Watch that can accurately measure skin temperature.
+
+\subsubsection{Historical variables}
+The increases in model accuracy when historical variables were added to the model did not justify the increased complexity.
+This situation can be partially explained by the fact that we carefully chose to analyze data collected when participants were in near `steady-state' conditions.
+This choice was driven by the fact that people in their office, on average, spend most of their time at their desk in near `steady-state' conditions.
+Predicting how people perceive their thermal environment during transitory conditions goes beyond the scope of our research.
+
+\subsection{The compliance rate of participants and data quality considerations}\label{subsec:compliance}
+Six months of daily longitudinal collection is a challenge in terms of ensuring that participants maintain compliance with experimental guidelines.
+The Cozie smartwatch-based methodology turned out to facilitate high compliance with none of the participants dropping out from the study, and all completed at least 1080 surveys. 
+This result reinforces previous work in micro-EMA and its ease of deployment in collecting longitudinal data with less survey fatigue~\cite{Intille2016-xb}.
+Compliance maintenance was enhanced with notifications sent through a messaging app that would remind the participants about notable achievements or deficiencies in the experimental process. 
+
+Despite the compliance rate, some participants were not fully cognizant of their perspective on each response given over the six months due to survey fatigue.
+This risk could be mitigated in future work through early detection, incentives, and by significantly reducing the number of surveys that each participant has to complete every week.
+This risk is significant for data-driven models, which are highly susceptible to `bad' data. 
+One possible other solution to this problem is utilizing the model to control their environment actively.
+
+\subsection{Limitations}\label{subsec:limitations}
+One notable limitation of the deployment is that the Singapore climate has little diversity across the year. 
+Seasonality in other climates may result in longitudinal data needing more training beyond the 200--300 points found in this study.
+Studies in other climates may need to spread data collection into phases that account for different seasons.
+
+In addition, the experimental deployment for this study began in April 2020, just as Singapore entered a lockdown period due to COVID-19 restrictions. 
+Throughout the study, the lockdown situation was dynamic, but overall there was less diversity of data collection locations than intended.
+Most of the occupants were forced to work from home for the whole duration of the study, while those who were allowed to resume going to the office were required to wear face masks at all times.
+We started this study before the pandemic started, hence we did not include any questions about face masks. 
+
+Another notable limitation category relates to the nature of black-box machine learning models in the application of thermal comfort prediction. 
+The lack of conversion of model output or accuracy into the physical understanding of what makes people feel comfortable or not is troublesome in the context of improving comfort, particularly for facility operators.
+Future work should focus on the conversion of the accuracy of prediction to the applicability to system and occupant interaction.
+The previously mentioned personal comfort review found similar insight in the literature of such models~\cite{ArakawaMartins2022}.
+Among the different models tested, \gls{rdf} is one of the most widely adopted in the literature and it's performance justifies its adoption (Figure~\ref{fig:boxen_comp_metrics_thermal}).
+Nevertheless, when compared to a regression-based model like \ac{svm} with similar prediction performance, \gls{rdf} required 100 times more computational time for model training, i.e., 620 and 6 seconds, respectively.
+Coincidentally, Extreme Gradient Boosting and \gls{mlp} also achieve a similar performance but require roughly 12 times the computational time of \ac{svm}, 83 and 67 seconds respectively.
+These results reinforce the selection of \ac{svm} since it does not sacrifice prediction accuracy;\ as a regression-based model, it is more interpretable and requires less computational cost.
+It should also be noted that since some machine learning models are not linear, like \gls{rdf}, this may cause that personal comfort model may still predict thermal preference to vary back and forward from `warmer' to `cooler' as the temperature increases, despite all other inputs being fixed.
+This situation has several issues. 
+Firstly, it does not provide an accurate representation of how people perceive their thermal environment nor take into account that thermal preference is an ordinal variable. 
+Secondly, it may be the cause of instabilities if the model is used to actively control a space.
+We believe that this issue has had very little coverage in previous studies that aimed to develop personal thermal comfort models, and it should be further investigated.

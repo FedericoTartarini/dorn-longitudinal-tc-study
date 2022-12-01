@@ -1,0 +1,21 @@
+\section{Conclusions}\label{sec:conclusions}
+We conducted a longitudinal thermal comfort study that aimed to develop personal thermal comfort models.
+Twenty participants took part in it, and they completed on average at least six right-here-right-now surveys per day for a period of 6 months.
+We developed an effective methodology that simplified the life of the participants, and none of them dropped from the study.
+We measured and logged environmental parameters, physiological signals, outdoor weather data, and participants' location outdoors and indoors.
+We used these data to train and test a personal thermal comfort model for each participant.
+We were able to determine that:
+
+\begin{itemize}
+    \item Cozie, a micro-EMA open-source Fitbit clock-face, is a reliable and robust solution to non-intrusively collect participants' feedback in field studies.
+    \item Personal comfort models were able to accurately predict (median F1-micro score \var{median_f1_score_no_gnb}) occupants' thermal preference.
+    With the limitations in data collection posed by the study methodology, they could outperform the PMV model.
+    \item \Acf{t-db}, \acf{t-nb}, \acf{hr}, \acf{t-sk-w}, and \acf{w-i}, listed in decreasing order of importance, had the highest average marginal contribution to the overall model prediction.
+    \item The thermal personal comfort model prediction accuracy (F1-micro) plateaued at around 300 data points across all participants.
+    Individual personal models are sensitive to dataset size to varying degrees.
+    The amount of data required to characterize thermal comfort could potentially be reduced with the development of targeted sampling, which strategically requests feedback only when it is necessary.
+    \item We made available publicly the data we collected and open-sourced the Python code we used to analyze them to enable other researchers to test different hypotheses utilizing our data.
+\end{itemize}
+
+\section*{Acknowledgments}\label{sec:acknowledgments}
+This research has been supported by the Republic of Singapore's National Research Foundation through a grant to the Berkeley Education Alliance for Research in Singapore (BEARS) for the Singapore-Berkeley Building Efficiency and Sustainability in the Tropics (SinBerBEST) Program.

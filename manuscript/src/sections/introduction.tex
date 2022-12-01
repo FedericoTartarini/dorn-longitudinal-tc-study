@@ -1,0 +1,83 @@
+\section{Introduction}\label{sec:introduction}
+Occupant thermal comfort significantly affects how people perceive their indoor environment, and dissatisfaction is an ongoing challenge.
+Evidence shows that approximately 40~\% of 90,000 occupants are dissatisfied with their thermal environment~\cite{Graham2021-en}.
+Thermal comfort models are designed to predict comfort towards addressing this challenge.
+All major thermal comfort standards have models that are considered aggregate in nature~\cite{iso7730, ASHRAE552020}.
+All mainstream aggregate models aim to predict how a ``typical'' person or a group of people would perceive their thermal environment in terms of given environmental (e.g.,\ relative humidity, \ac{t-db}) and personal (i.e.,\ clothing and metabolic rate) parameters.
+For example, the \ac{pmv}, the most widely used model in thermal comfort research, predicts the average thermal sensation of a group of people sharing the same environment, as an outcome of the heat transfer balance model between the human body and its surrounding environment.
+The \ac{pmv} was developed through laboratory experiments by Fanger~\cite{Fanger1970}, and is now included in both the \gls{7730}~\cite{iso7730} and \gls{55} Standards~\cite{ASHRAE552020}.
+
+\subsection{Limitations of aggregate models}\label{subsec:limitations_aggregate}
+Both the \ac{pmv} and the adaptive models have several limitations when used to control the temperature in buildings~\cite{Kim2018a, Xie2020, deDear2013IndoorAir}, despite their successful adoption into international standards.
+(1) \textit{Required inputs} -- In real buildings, it is extremely challenging to accurately measure some input variables needed to calculate \ac{pmv}, such as metabolic rate, clothing, airspeed, and mean radiant temperature~\cite{VanHoof2008}.
+(2) \textit{Prediction accuracy} -- Even when all input variables are accurately measured, these models have poor accuracy both in predicting group and individual thermal comfort~\cite{Cheung2019}.
+(3) \textit{Training} -- Aggregate models do not adapt or re-learn~\cite{Xie2020}.
+They were developed using fixed and limited datasets and did not benefit from new feedback provided by people.
+They do not learn and adapt to specific conditions~\cite{Kim2018a}.
+(4) \textit{Limited inputs} -- Aggregate models only use a small set of input variables.
+They do not use variables, such as \ac{t-sk}, \ac{hr}, time of day, age, or health status, that may affect thermal perceptions of people~\cite{Kim2018a}.
+
+\subsection{The emergence of personal comfort models}\label{subsec:personal_models}
+Personal comfort models challenge the \emph{one-size-fits-all} approach of aggregate models.
+Instead of an average response from a group of people, a single model is trained and tested for each participant.
+Personal comfort models are, however, not limited to predicting one person's thermal preference.
+Their aggregated outputs can be used to predict the thermal preference of a large group of people sharing the same environment~\cite{Kim2018a}.
+Since their introduction, personal comfort models have been expanded to leverage data collected using a wide array of sensors, including portable sensors and devices~\cite{Lee2017-tx, Konis2017-eo}, building management systems~\cite{Lee2019-oj, Guenther2019-hb}, personal comfort systems~\cite{Aryal2020-tp} as well as onboard sensors in wearable devices and smartphones.
+This network of sensors can remotely and non-intrusively measure, log and store spatiotemporal environmental and physiological data.
+
+Wearable devices have increased the viability of personal model development due to the use of \emph{physiological sensors} to improve model accuracy.
+For example, \acf{t-sk} reflects the vasomotor tone~\cite{Romanovsky2018} while heart rate correlates with activity levels.
+This is supported by previous research that has shown that the use of \ac{t-sk} as an independent variable can improve the prediction accuracy of thermal comfort models~\cite{Choi2017, Choi2012a, Liu2019a, Ji2017, Xiong2016, Katic2020-pt}.
+In certain applications, \ac{t-sk} may be even determined using non-contact sensors like infrared~\cite{Ghahramani2016, Li2019a, Cosma2018a}.
+However, it is essential to emphasize that non-contact sensors are less accurate than those that are in direct contact with the skin;
+they can only monitor \ac{t-sk} from body areas that are in the line of sight to the camera and are expensive to install~\cite{Xie2020}.
+They, however, do not require having a sensor to be worn by people.
+Experimental methodologies collecting \ac{t-sk} are common and \glspl{ib} sensors are often used.
+They can accurately measure and log \ac{t-sk}~\cite{VanMarkenLichtenbelt2006, Hasselberg2013a, Tartarini2020d}.
+Currently, most smartwatches on the market can measure \ac{hr} with sufficient accuracy for thermal comfort research;
+however, none incorporate sufficiently accurate skin temperature sensors~\cite{Liu2019a}.
+
+\subsection{Limitations of personal comfort models}\label{subsec:limitations_pcm}
+Despite the momentum of personal comfort models, there are still several unknowns and limitations as outlined in a recent review~\cite{ArakawaMartins2022}.
+This analysis pinpoints a lack of diversity in space types, climates, and conditions used to train personal comfort models.
+The review showed that only 3 out of 37 studies selected for analysis included data collection outside office spaces or lab-based thermal chambers used to emulate an office environment~\cite{ArakawaMartins2022}.
+Another limitation is that there was a wide range of the amount of longitudinal data collected in the studies, with anywhere between 8 and 416 points collected per person.
+Researchers placed little emphasis on whether the length and data amount were exhaustive in capturing the predictability of an individual.
+In addition, in personal comfort model experiments, it is not common or easy to log and measure information about the participant's dynamic personal factors such as clothing or activity levels~\cite{Ngarambe2019-aw}.
+Addressing the lack of diversity and the amount of data is not easy due to experimental constraints.
+
+One of the biggest challenges that researchers currently face is recording how people perceive their thermal environment over a long period of time while minimizing the fatigue of completing a \ac{rhrn} thermal comfort survey.
+To partially solve this issue, \textcite{Kim2018} tried to infer occupants' thermal preferences by analyzing specific behaviors, such as turning on and off heating and cooling devices.
+They then coupled these data with environmental readings to infer a user's preferences without them having to complete a survey.
+However, thermal actions may be triggered by other reasons besides thermal discomfort;
+for example, \textcite{Kim2018} found that users turn on the heating element in their chair to mitigate back pain.
+
+\subsection{Improving personal comfort models through larger and more diverse longitudinal data}\label{subsec:our_approach}
+To address the limitations mentioned above, an emerging methodology focuses on the use of wearable devices to collect physiological data and act as the subjective feedback collection interface. 
+This method builds upon research in the area of Ecological Momentary Assessments (EMA), a form of collecting subjective information in diverse field-based setting~\cite{Shiffman2008-xb}. 
+A style of this methodology emerging as a popular way to reduce the incidence of survey fatigue is micro-EMA, in which smartwatches are used to prompt a research participant to leave feedback in a fast and time-efficient manner~\cite{Intille2016-xb}.
+Micro-EMA has been shown to deliver higher response rates with a lower burden on research participants than a smartphone or computer-based survey~\cite{Ponnada2017-dl}.
+To build upon this foundation and help solve the issue of collecting perception data from people, our team has contributed to the development of the micro-EMA Cozie project that targets indoor occupant data collection~\cite{Jayathissa2019a}.
+Cozie is an open-source application that one can install on Fitbit (Versa 2 and Ionic) or Apple smartwatches.
+The platform has been utilized in previous studies to test the implementation and modeling of smartwatch-based subjective data collection~\cite{Jayathissa2020-pv, Quintana2021-ka}, study the thermal preference, imbalanced classes~\cite{Quintana2020-zu}, and create personal comfort models using building information model components as inputs~\cite{Abdelrahman2021-mx}.
+One can find more information about Cozie and the official documentation at \url{https://cozie.app} and \url{https://cozie-apple.com}.
+Cozie allows people to conveniently complete a \ac{rhrn} survey via their smartwatches.
+Subjects' perceptions, preferences, and behaviors collected via Cozie can then be coupled with environmental data collected from wireless sensing devices and physiological data collected by the smartwatch.
+
+\subsection{Aim and objectives}\label{subsec:aim_objectives}
+Our research aims to resolve gaps in personal thermal comfort models by collecting field-based thermal preference data.
+Our methodology is designed to enable us to address the following questions with resulting novel insights:
+
+\begin{itemize}
+    \item How many data points per user must be collected to develop a reliable and robust personal comfort model?
+        This study seeks to collect more than twice the amount of data per person compared to previous studies.
+        We collected data for 180 days resulting in more feedback responses per person (up to 1080) than in any previous study~\cite{ArakawaMartins2022}.
+    \item Are environmental and physiological data sufficient to create personal thermal comfort models while minimizing the impact on users? 
+        The methodology of this paper utilizes a novel framework of simple-to-use non-intrusive techniques to collect physiological, environmental, and geospatial data using smartwatch-based micro-EMA.
+    \item Can increasing diversity of space types and conditions improve the accuracy of personal comfort models?
+        How can different variables contribute to the overall model accuracy?
+        This study is designed to collect data from diverse spaces, including the participants' homes, where there is a lack of data in previous studies.
+        In addition, this paper is novel in accurately monitoring whether the \ac{rhrn} was completed during transitory conditions.
+\end{itemize}
+
+In addition, we decided to publicly share our data so other people can use it to test different hypotheses or develop personal comfort models using a different methodology.

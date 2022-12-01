@@ -1,0 +1,37 @@
+\begin{table}[htb!]
+    \caption{Hyper-parameters used in the grid search.}
+    \centering
+    \begin{tabular}{cc}
+        \toprule
+        Model     & Value                                        \\
+        \midrule
+        \gls{rdf} & \makecell{Number of trees: 100, 300, 500     \\
+        Split criterion: Gini index \\
+        Min. samples for split: 2, 3, 4 \\
+        Min. samples on an edge : 1, 2, 3 \\
+        Class weight : balanced
+        } \\
+        \midrule
+        \gls{lr}  & \makecell{Inverse of regularization          \\
+        strength: 0.01, 0.1, 1, 10, 100 \\
+        Fit intercept: True, False
+        } \\
+        \midrule
+        Extreme Gradient Boosting & \makecell{Number of gradient boosted         \\
+        trees: 100, 300, 500 \\
+        Maximum tree depth: 2, 4, 6, 8, 10} \\
+        \midrule
+        \acf{svm} & \makecell{Regularization parameter:          \\
+        0.01, 0.1, 1, 10, 100 \\
+        Kernel: rbf, sigmoid} \\
+        \midrule
+        K-Nearest Neighbors  & \makecell{Number of neighbors: 1, 2, 3, 5, 7 \\
+        Weights: uniform, distance} \\
+        \midrule
+        Gaussian Naive Bayes & \makecell{-}                                 \\
+        \midrule
+        \gls{mlp} & \makecell{Hidden layer size: (13, 13)}       \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:hyperparameters}
+\end{table}

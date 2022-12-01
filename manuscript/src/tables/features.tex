@@ -1,0 +1,16 @@
+\begin{table}[h!]
+    \centering
+    \caption{Independent variables used to train the respective model. We used the following abbreviations in the table: self-reported clothing and activity (clo--met), environmental (env), wearable (wear), historical (hist).}
+    \label{tab:features}
+    \small \begin{tabular}{ccccccc}
+               \toprule
+               & \multicolumn{6}{c}{Variable sets} \\
+               \cmidrule(lr){2-7}
+               model              & \rotatebox{90}{env} & \rotatebox{90}{time} & \rotatebox{90}{wear} & \rotatebox{90}{clo--met}  & \rotatebox{90}{env-hist} & \rotatebox{90}{wear-hist} \\
+               \midrule
+               Thermal preference PCM  & x                   & x                    & x                    &                          &                         &                          \\
+               Thermal preference PCM clo--met     & x                   & x                    & x                    & x                        &                         &                          \\
+               Thermal preference PCM clo--met hist & x                   & x                    & x                    & x                        & x                       & x                        \\
+               \bottomrule
+    \end{tabular}
+\end{table}
